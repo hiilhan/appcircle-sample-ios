@@ -7,13 +7,14 @@ trigger:
 - master
 
 pool:
-  name: 'MacOS-Agent'
+  vmImage: 'macos-latest'
+  # name: 'MacOS-Agent' # Self-hosted
 
 steps:
 - task: Xcode@5
   inputs:
     actions: 'build'
-    scheme: ''
+    scheme: 'Appcircle'
     sdk: 'iphoneos'
     configuration: 'Release'
     xcWorkspacePath: '**/*.xcodeproj/project.xcworkspace'
