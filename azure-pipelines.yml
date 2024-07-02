@@ -34,8 +34,15 @@ steps:
     signingOption: 'manual'
     signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
     provisioningProfileUuid: '$(APPLE_PROV_PROFILE_UUID)'
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(system.defaultworkingdirectory)'
+    Contents: '**/*.ipa'
+    TargetFolder: '$(build.artifactStagingDirectory)'
+    OverWrite: true
+    flattenFolders: true
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'ac-sample-artifact'
-    # publishLocation: 'Container'
+    publishLocation: 'Container'
