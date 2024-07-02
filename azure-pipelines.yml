@@ -3,19 +3,38 @@
 # Add steps that install certificates, test, sign, and distribute an app, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/xcode
 
+variables:
+- group: AppVariables
+
 trigger:
-- master
+- test/azure-extension
 
 pool:
   # vmImage: 'macos-latest'
   name: 'MacOS-Agent' # Self-hosted
 
 steps:
+- task: InstallAppleCertificate@2
+  inputs:
+    certSecureFile: 'ac-sample-distribution.p12'
+    certPwd: '$(p12-password)'
+    keychain: 'temp'
+- task: InstallAppleProvisioningProfile@1
+  inputs:
+    provisioningProfileLocation: 'secureFiles'
+    provProfileSecureFile: 'ac-sample-adhoc.mobileprovision'
 - task: Xcode@5
   inputs:
-    actions: 'build'
-    scheme: 'Appcircle'
-    sdk: 'iphoneos'
+    actions: 'clean build'
     configuration: 'Release'
-    xcWorkspacePath: '**/*.xcodeproj/project.xcworkspace'
-    xcodeVersion: 'default' # Options: 8, 9, 10, 11, 12, default, specifyPath
+    sdk: 'iphoneos'
+    scheme: 'Appcircle'
+    packageApp: true
+    signingOption: 'manual'
+    signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
+    provisioningProfileUuid: '$(APPLE_PROV_PROFILE_UUID)'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'ac-sample-artifact'
+    # publishLocation: 'Container'
