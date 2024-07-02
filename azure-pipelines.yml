@@ -10,8 +10,8 @@ trigger:
 - test/azure-extension
 
 pool:
-  vmImage: 'macos-latest' # Cloud
-  # name: 'MacOS-Agent' # Self-hosted
+  # vmImage: 'macos-latest' # Cloud
+  name: 'MacOS-Agent' # Self-hosted
 
 steps:
 - task: InstallAppleCertificate@2
@@ -49,6 +49,6 @@ steps:
 - task: AppcircleDistribute@0
   inputs:
     accessToken: '$(ac-pat)'
-    profileId: 'Test Distribution'
+    profileId: '$(ac-dist-profile-id)'
     appPath: '$(Build.ArtifactStagingDirectory)/Appcircle.ipa'
-    message: 'Hello from Azure Pipeline'
+    message: '$(ac-dist-message)'
