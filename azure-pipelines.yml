@@ -7,8 +7,8 @@ trigger:
 - master
 
 pool:
-  vmImage: 'macos-latest'
-  # name: 'MacOS-Agent' # Self-hosted
+  # vmImage: 'macos-latest'
+  name: 'MacOS-Agent' # Self-hosted
 
 steps:
 - task: Xcode@5
