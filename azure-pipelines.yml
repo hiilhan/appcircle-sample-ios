@@ -46,3 +46,9 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'ac-sample-artifact'
     publishLocation: 'Container'
+- task: AppcircleDistribute@0
+  inputs:
+    accessToken: '$(ac-pat)'
+    profileId: 'Test Distribution'
+    appPath: '$(Build.ArtifactStagingDirectory)/Appcircle.ipa'
+    message: 'Hello from Azure Pipeline'
