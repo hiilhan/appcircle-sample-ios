@@ -10,8 +10,8 @@ trigger:
 - test/azure-extension
 
 pool:
-  # vmImage: 'macos-latest' # Cloud
-  name: 'MacOS-Agent' # Self-hosted
+  vmImage: 'macos-latest' # Cloud
+  # name: 'MacOS-Agent' # Self-hosted
 
 steps:
 - task: InstallAppleCertificate@2
