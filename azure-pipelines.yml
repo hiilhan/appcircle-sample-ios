@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'macos-latest'
+  name: 'MacOS-Agent'
 
 steps:
 - task: Xcode@5
