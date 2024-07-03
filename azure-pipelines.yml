@@ -10,7 +10,7 @@ trigger:
 - test/azure-extension
 
 pool:
-  vmImage: 'macos-13' # 'macos-latest' # Cloud
+  vmImage: 'macos-14' # 'macos-latest' # Cloud
   # name: 'MacOS-Agent' # Self-hosted
 
 steps:
@@ -21,7 +21,7 @@ steps:
     certSecureFile: 'ac-sample-distribution.p12'
     certPwd: '' # '$(p12-password)'
     keychain: 'temp'
-    opensslPkcsArgs: '-legacy'
+    # opensslPkcsArgs: '-legacy'
 - task: InstallAppleProvisioningProfile@1
   inputs:
     provisioningProfileLocation: 'secureFiles'
