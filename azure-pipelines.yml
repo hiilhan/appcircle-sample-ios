@@ -4,7 +4,8 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/xcode
 
 variables:
-- group: AppVariables
+- group: AppVariables-Common
+- group: AppVariables-EAS
 
 trigger:
 - test/azure-extension-eas
@@ -21,7 +22,7 @@ steps:
     certSecureFile: 'ac-sample-distribution.p12'
     certPwd: '' # '$(p12-password)'
     keychain: 'temp'
-    # opensslPkcsArgs: '-legacy'
+    # opensslPkcsArgs: '-legacy' # Note: Enable for Self-hosted agent
 - task: InstallAppleProvisioningProfile@1
   inputs:
     provisioningProfileLocation: 'secureFiles'
@@ -48,9 +49,11 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'ac-sample-artifact'
     publishLocation: 'Container'
-# - task: AppcircleEnterpriseStore@0
-#   inputs:
-#     accessToken: '$(ac-pat)'
-#     profileId: '$(ac-dist-profile-id)'
-#     appPath: '$(Build.ArtifactStagingDirectory)/Appcircle.ipa'
-#     message: '$(ac-dist-message)'
+- task: AppcircleEnterpriseStore@0
+  inputs:
+    accessToken: '$(ac-pat)'
+    entProfileId: '$(ac-entp-profile-id)'
+    appPath: '$(Build.ArtifactStagingDirectory)/Appcircle.ipa'
+    summary: '$(ac-summary-notes)'
+    releaseNotes: '$(ac-release-notes)'
+    publishType: 'Beta'
