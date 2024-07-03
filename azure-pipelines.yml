@@ -7,7 +7,7 @@ variables:
 - group: AppVariables
 
 trigger:
-- test/azure-extension
+- test/azure-extension-td
 
 pool:
   vmImage: 'macos-14' # 'macos-latest' # Cloud
