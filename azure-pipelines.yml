@@ -4,7 +4,8 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/xcode
 
 variables:
-- group: AppVariables
+- group: AppVariables-Common
+- group: AppVariables-TD
 
 trigger:
 - test/azure-extension-td
@@ -21,7 +22,7 @@ steps:
     certSecureFile: 'ac-sample-distribution.p12'
     certPwd: '' # '$(p12-password)'
     keychain: 'temp'
-    # opensslPkcsArgs: '-legacy'
+    # opensslPkcsArgs: '-legacy' # Note: Enable for Self-hosted agent
 - task: InstallAppleProvisioningProfile@1
   inputs:
     provisioningProfileLocation: 'secureFiles'
