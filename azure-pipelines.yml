@@ -7,7 +7,7 @@ variables:
 - group: AppVariables
 
 trigger:
-- test/azure-extension
+- test/azure-extension-eas
 
 pool:
   vmImage: 'macos-14' # 'macos-latest' # Cloud
@@ -48,9 +48,9 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'ac-sample-artifact'
     publishLocation: 'Container'
-- task: AppcircleDistribute@0
-  inputs:
-    accessToken: '$(ac-pat)'
-    profileId: '$(ac-dist-profile-id)'
-    appPath: '$(Build.ArtifactStagingDirectory)/Appcircle.ipa'
-    message: '$(ac-dist-message)'
+# - task: AppcircleEnterpriseStore@0
+#   inputs:
+#     accessToken: '$(ac-pat)'
+#     profileId: '$(ac-dist-profile-id)'
+#     appPath: '$(Build.ArtifactStagingDirectory)/Appcircle.ipa'
+#     message: '$(ac-dist-message)'
