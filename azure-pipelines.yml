@@ -52,7 +52,7 @@ steps:
 - task: AppcircleEnterpriseStore@0
   inputs:
     accessToken: '$(ac-pat)'
-    entProfileId: '$(ac-entp-profile-id)'
+    entProfileId: '$(ac-entp-profile-id-ios)'
     appPath: '$(Build.ArtifactStagingDirectory)/Appcircle.ipa'
     summary: '$(ac-summary-notes)'
     releaseNotes: '$(ac-release-notes)'
