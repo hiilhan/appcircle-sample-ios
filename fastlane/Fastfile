@@ -38,8 +38,8 @@ platform :ios do
     import_certificate(
       certificate_path: "certificates/ac-sample-distribution.p12",
       certificate_password: "",
-      keychain_name: "temp_keychain",
-      keychain_password: "temp_password"
+      # keychain_name: "temp_keychain",
+      # keychain_password: "temp_password"
     )
 
     # Build the app with gym
