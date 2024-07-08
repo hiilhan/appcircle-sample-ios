@@ -25,3 +25,8 @@ DerivedData/
 
 ## Gcc Patch
 /*.gcno
+
+# Signing files
+fastlane/.env
+certificates/ac-sample-distribution.p12
+certificates/ac-sample-adhoc.mobileprovision

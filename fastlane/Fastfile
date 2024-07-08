@@ -1,0 +1,82 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+require 'dotenv'
+Dotenv.load('.env')
+
+platform :ios do
+  desc "Build the iOS app using a provisioning profile and p12 certificate"
+  lane :build_signed do
+    # Create a temporary keychain
+    create_keychain(
+      name: "temp_keychain",
+      password: "temp_password",
+      default_keychain: true,
+      unlock: true,
+      timeout: 3600,
+      lock_when_sleeps: true
+    )
+
+    # Install the provisioning profile
+    install_provisioning_profile(path: "certificates/ac-sample-adhoc.mobileprovision")
+
+    # Import the p12 certificate
+    import_certificate(
+      certificate_path: "certificates/ac-sample-distribution.p12",
+      certificate_password: "",
+      keychain_name: "temp_keychain",
+      keychain_password: "temp_password"
+    )
+
+    # Build the app with gym
+    gym(
+      scheme: "Appcircle",
+      configuration: "Release",
+      output_directory: "./build",
+      clean: true,
+      export_method: "ad-hoc", # or use "app-store", "enterprise", "development" based on your needs
+      export_options: {
+        provisioningProfiles: { 
+          "io.appcircle.dashboard" => ENV["AC_PP_UUID"]
+        }
+      }
+    )
+
+    # Delete the temporary keychain
+    delete_keychain(name: "temp_keychain")
+  end
+
+  lane :deploy_td do
+    appcircle_testing_distribution(
+      accessToken: ENV["AC_ACCESS_TOKEN"], # Your Appcircle Access Token
+      profileID: ENV["AC_PROFILE_ID"], # ID of your Appcircle Distribution Profile
+      appPath: ENV["AC_APP_PATH"], # Path to your iOS .ipa or .xcarchive, or Android APK or App Bundle
+      message: ENV["AC_MESSAGE"] # Your Message
+    )
+  end
+
+  lane :deploy_eas do
+      appcircle_enterprise_store(
+        accessToken: ENV["AC_ACCESS_TOKEN"],
+        entProfileId: ENV["ENTERPRISE_PROFILE_ID"],
+        appPath: ENV["AC_APP_PATH"],
+        summary: ENV["SUMMARY"],
+        releaseNotes: ENV["RELEASE_NOTES"],
+        publishType: ENV["PUBLISH_TYPE"] # Assign the appropriate number based on the status: None (0), Beta (1), Live (2)
+      )
+    end
+end
