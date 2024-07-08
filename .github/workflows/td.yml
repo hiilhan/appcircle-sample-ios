@@ -45,7 +45,8 @@ jobs:
           
           echo "\nList provisioning profiles"
           ls -la $GITHUB_WORKSPACE/certificates
-          security find-identity -v -p codesigning
+          security find-identity -v -p codesigning 
+          security find-identity -v -p codesigning -k ~/Library/Keychains/temp_keychain
           
       - name: Build
         env:
