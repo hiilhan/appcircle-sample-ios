@@ -2,9 +2,9 @@ name: iOS build workflow
 
 on:
   push:
-    branches: [ "test/github-extension-td" ]
+    branches: [ "test/github-extensions-td-eas" ]
   pull_request:
-    branches: [ "test/github-extension-td" ]
+    branches: [ "test/github-extensions-td-eas" ]
 
 jobs:
   build:
