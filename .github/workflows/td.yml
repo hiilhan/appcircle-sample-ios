@@ -43,10 +43,9 @@ jobs:
           echo "$GITHUB_WORKSPACE"
           ls $GITHUB_WORKSPACE
           
-          echo "\nList provisioning profiles"
+          echo "Certificates"
           ls -la $GITHUB_WORKSPACE/certificates
           security find-identity -v -p codesigning 
-          security find-identity -v -p codesigning -k ~/Library/Keychains/temp_keychain
           
       - name: Build
         env:
@@ -54,4 +53,11 @@ jobs:
         run: |
           echo $AC_PP_UUID
           bundle exec fastlane ios build_signed
+
+      # - name: List provisioning profiles
+      #   if: always()
+      #   run: |
+      #     echo "List provisioning profiles"
+      #     security find-identity -v -p codesigning 
+      #     security find-identity -v -p codesigning -k ~/Library/Keychains/temp_keychain
       
