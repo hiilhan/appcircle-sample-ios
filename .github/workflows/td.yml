@@ -41,10 +41,13 @@ jobs:
           ls $RUNNER_TEMP
           echo "$GITHUB_WORKSPACE"
           ls $GITHUB_WORKSPACE
+          echo "Certificates"
+          ls $GITHUB_WORKSPACE/certificates
           
       - name: Build
         env:
           AC_PP_UUID: ${{ vars.PROVISIONING_PROFILE }}
         run: |
+          echo $AC_PP_UUID
           bundle exec fastlane ios build_signed
       
