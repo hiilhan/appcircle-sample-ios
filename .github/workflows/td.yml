@@ -39,10 +39,13 @@ jobs:
         run: |
           echo "$RUNNER_TEMP"
           ls $RUNNER_TEMP
+          
           echo "$GITHUB_WORKSPACE"
           ls $GITHUB_WORKSPACE
-          echo "Certificates"
-          ls $GITHUB_WORKSPACE/certificates
+          
+          echo "\nList provisioning profiles"
+          ls -la $GITHUB_WORKSPACE/certificates
+          security find-identity -v -p codesigning
           
       - name: Build
         env:
