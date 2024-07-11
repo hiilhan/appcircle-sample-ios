@@ -19,7 +19,7 @@ jobs:
         env:
           IPA_URL: ${{ vars.IPA_URL }}
         run: |
-          git clone IPA_URL
+          git clone $IPA_URL
           mv */*.ipa $RUNNER_TEMP
 
       - name: Appcircle Testing Distribution
