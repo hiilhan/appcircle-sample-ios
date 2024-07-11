@@ -33,4 +33,4 @@ jobs:
           appPath: $RUNNER_TEMP/Appcircle.ipa
           summary: "This is a summary."
           releaseNotes: "This is a release note."
-          publishType: 0
+          publishType: 1
