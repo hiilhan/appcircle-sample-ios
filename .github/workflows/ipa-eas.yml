@@ -1,0 +1,36 @@
+name: IPA to EAS
+
+on:
+  push:
+    branches: [ "test/github-extensions-td-eas-ipa" ]
+  pull_request:
+    branches: [ "test/github-extensions-td-eas-ipa" ]
+
+jobs:
+  build:
+    name: Build and Test default scheme using any available iPhone simulator
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Import .ipa file
+        env:
+          IPA_URL: ${{ vars.IPA_URL }}
+        run: |
+          git clone $IPA_URL
+          mv */*.ipa $RUNNER_TEMP
+
+      - name: Appcircle Enterprise Store
+        uses: appcircleio/appcircle-enterprise-store-githubaction@v0.0.1
+        env:
+          AC_ACCESS_TOKEN: ${{ secrets.AC_ACCESS_TOKEN }}
+          AC_ENT_PROFILE_ID: ${{ vars.AC_ENT_PROFILE_ID }}
+        with:
+          accessToken: $AC_ACCESS_TOKEN
+          entProfileId: $AC_ENT_PROFILE_ID
+          appPath: $GITHUB_WORKSPACE/Appcircle.ipa
+          summary: "This is a summary."
+          releaseNotes: "This is a release note."
+          publishType: 0
