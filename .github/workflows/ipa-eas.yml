@@ -30,7 +30,7 @@ jobs:
         with:
           accessToken: $AC_ACCESS_TOKEN
           entProfileId: $AC_ENT_PROFILE_ID
-          appPath: $GITHUB_WORKSPACE/Appcircle.ipa
+          appPath: $RUNNER_TEMP/Appcircle.ipa
           summary: "This is a summary."
           releaseNotes: "This is a release note."
           publishType: 0
