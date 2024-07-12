@@ -15,12 +15,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # - name: Import .ipa file
+      #   env:
+      #     IPA_URL: ${{ vars.IPA_URL }}
+      #   run: |
+      #     git clone $IPA_URL
+      #     mv */*.ipa $RUNNER_TEMP
       - name: Import .ipa file
         env:
-          IPA_URL: ${{ vars.IPA_URL }}
+          APPCIRCLE_IPA_BASE64: ${{ vars.APPCIRCLE_IPA_BASE64 }}
         run: |
-          git clone $IPA_URL
-          mv */*.ipa $RUNNER_TEMP
+          echo -n "$APPCIRCLE_IPA_BASE64" | base64 --decode -o $RUNNER_TEMP/Appcircle.ipa
+
 
       - name: Appcircle Testing Distribution
         uses: appcircleio/appcircle-testing-distribution-githubaction@v0.0.1
