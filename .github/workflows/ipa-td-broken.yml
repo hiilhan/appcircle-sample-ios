@@ -23,12 +23,11 @@ jobs:
           echo $RUNNER_TEMP
           ls -al $RUNNER_TEMP
 
-      - name: Archive code coverage results
+      - name: Archive ipa file
         uses: actions/upload-artifact@v4
         with:
           name: appcircle-ipa
-          path: |
-            $RUNNER_TEMP/*.ipa
+          path: /Users/runner/work/_temp/*.ipa
 
       # - name: Check Integrity of IPA
       #   run: |
