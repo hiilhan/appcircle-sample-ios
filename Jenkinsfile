@@ -23,13 +23,13 @@ pipeline {
         //   steps {
         //     dir(DIR) {
         //         withCredentials([
-	// 		 	file(credentialsId: 'PROVISIONING_PROFILE', variable: 'PROVISIONING_PROFILE'),
-	// 		 	file(credentialsId: 'DISTRIBUTION_CERTIFICATE', variable: 'DISTRIBUTION_CERTIFICATE')
-	// 		 ]) {
+        //              file(credentialsId: 'PROVISIONING_PROFILE', variable: 'PROVISIONING_PROFILE'),
+        //              file(credentialsId: 'DISTRIBUTION_CERTIFICATE', variable: 'DISTRIBUTION_CERTIFICATE')
+        //          ]) {
         //             sh 'mkdir certificates'
         //             sh 'cp $PROVISIONING_PROFILE certificates/ac-sample-adhoc.mobileprovision'
         //             sh 'cp $DISTRIBUTION_CERTIFICATE certificates/ac-sample-distribution.p12'
-	// 		 }
+        //          }
         //     }
         //   }
         // }
@@ -46,8 +46,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 withCredentials([
-			file(credentialsId: 'appcircle-ipa-signed', variable: 'APPCIRCLE_IPA')
-		]) {
+                    file(credentialsId: 'appcircle-ipa-signed', variable: 'APPCIRCLE_IPA')
+                ]) {
                     // // TD
                     // greet accessToken: hudson.util.Secret.fromString(AC_PAT),
                     //       profileID: '${PROFILE_ID}',
@@ -61,7 +61,7 @@ pipeline {
                           summary: 'This is a summary.',
                           releaseNote: 'This is a release note.',
                           publishType: '1'
-		}
+                }
             }
         }
     }
