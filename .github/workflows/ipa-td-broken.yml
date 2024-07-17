@@ -26,7 +26,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: appcircle-ipa
-          path: $RUNNER_TEMP/Appcircle.ipa
+          path: ${{ env.RUNNER_TEMP }}/Appcircle.ipa
 
       # - name: Check Integrity of IPA
       #   run: |
