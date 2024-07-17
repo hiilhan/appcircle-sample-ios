@@ -40,7 +40,7 @@ jobs:
       #     plutil -p Payload/Appcircle.app/Info.plist
 
       - name: Appcircle Testing Distribution
-        uses: appcircleio/appcircle-testing-distribution-githubaction@v0.0.1
+        uses: appcircleio/appcircle-testing-distribution-githubaction@fix/uploadStatus
         env:
           AC_ACCESS_TOKEN: ${{ secrets.AC_ACCESS_TOKEN }}
           AC_PROFILE_ID: ${{ vars.AC_PROFILE_ID }}
