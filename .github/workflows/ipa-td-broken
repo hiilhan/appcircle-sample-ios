@@ -1,0 +1,33 @@
+name: IPA to TD
+
+on:
+  push:
+    branches: [ "test/github-extensions-td-eas-ipa" ]
+  pull_request:
+    branches: [ "test/github-extensions-td-eas-ipa" ]
+
+jobs:
+  build:
+    name: Build and Test default scheme using any available iPhone simulator
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Import .ipa file
+        env:
+          APPCIRCLE_IPA_BASE64: ${{ vars.APPCIRCLE_IPA_BASE64 }}
+        run: |
+          echo -n "$APPCIRCLE_IPA_BASE64" | base64 --decode -o $RUNNER_TEMP/Appcircle.ipa
+
+      - name: Appcircle Testing Distribution
+        uses: appcircleio/appcircle-testing-distribution-githubaction@v0.0.1
+        env:
+          AC_ACCESS_TOKEN: ${{ secrets.AC_ACCESS_TOKEN }}
+          AC_PROFILE_ID: ${{ vars.AC_PROFILE_ID }}
+        with:
+          accessToken: $AC_ACCESS_TOKEN
+          profileID: $AC_PROFILE_ID
+          appPath: $RUNNER_TEMP/Appcircle.ipa
+          message: "Hello from Github to TD"
