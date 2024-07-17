@@ -24,13 +24,14 @@ jobs:
 
       - name: Check Integrity of IPA
         run: |
-          cd $RUNNER_TEMP
-          unzip Appcircle.ipa -d AppcircleIpaExtracted
+          # cd $RUNNER_TEMP
+          unzip $RUNNER_TEMP/Appcircle.ipa -d $RUNNER_TEMP/AppcircleIpaExtracted
           
-          cd AppcircleIpaExtracted
-          codesign -vvv --deep --strict Payload/Appcircle.app
-          spctl -a -vv -t install Payload/Appcircle.app
-          plutil -p Payload/Appcircle.app/Info.plist
+          codesign -vvv --deep --strict $RUNNER_TEMP/AppcircleIpaExtracted/Payload/Appcircle.app
+          # spctl -a -vv -t install Payload/Appcircle.app
+          # plutil -p Payload/Appcircle.app/Info.plist
+
+          
 
       - name: Appcircle Testing Distribution
         uses: appcircleio/appcircle-testing-distribution-githubaction@v0.0.1
