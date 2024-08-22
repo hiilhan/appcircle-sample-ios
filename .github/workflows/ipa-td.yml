@@ -32,7 +32,7 @@ jobs:
       - name: Find Artifacts
         run: |
           find "${RUNNER_TEMP}" -type f \( -name "*.apk" -o -name "*.aab" \)
-          ls -l "${RUNNER_TEMP}"
+          ls -la "${RUNNER_TEMP}"
 
       - name: Appcircle Testing Distribution
         uses: appcircleio/appcircle-testing-distribution-githubaction@feat/SP-201
