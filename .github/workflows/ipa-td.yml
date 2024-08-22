@@ -22,7 +22,7 @@ jobs:
         run: |
           git clone $IPA_URL
           ls -la
-          # mv */*.ipa $RUNNER_TEMP
+          mv appcircle-sample-ios-ipa $RUNNER_TEMP/ipa
       
       # - name: Import .ipa file
       #   env:
@@ -35,11 +35,11 @@ jobs:
           find "${RUNNER_TEMP}" -type f \( -name "*.apk" -o -name "*.aab" \)
           ls -la "${RUNNER_TEMP}"
 
-      # - name: Appcircle Testing Distribution
-      #   uses: appcircleio/appcircle-testing-distribution-githubaction@feat/SP-201
-      #   with:
-      #     personalAPIToken: ${{ secrets.AC_ACCESS_TOKEN }}
-      #     profileName: ${{ vars.AC_PROFILE_NAME }}
-      #     createProfileIfNotExists: ${{ vars.AC_CREATE_PROFILE_IF_NOT_EXISTS }}
-      #     appPath: ${{ runner.temp }}/${{ vars.APP_PATH }}
-      #     message: "Hello from Github to TD"
+      - name: Appcircle Testing Distribution
+        uses: appcircleio/appcircle-testing-distribution-githubaction@feat/SP-201
+        with:
+          personalAPIToken: ${{ secrets.AC_ACCESS_TOKEN }}
+          profileName: ${{ vars.AC_PROFILE_NAME }}
+          createProfileIfNotExists: ${{ vars.AC_CREATE_PROFILE_IF_NOT_EXISTS }}
+          appPath: ${{ runner.temp }}/${{ vars.APP_PATH }}
+          message: "Hello from Github to TD"
