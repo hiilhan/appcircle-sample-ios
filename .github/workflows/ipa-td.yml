@@ -28,6 +28,10 @@ jobs:
         run: |
           echo -n "$APPCIRCLE_IPA_BASE64" | base64 --decode -o $RUNNER_TEMP/Appcircle.ipa
 
+      - name: Find Artifacts
+        run: |
+          find "${RUNNER_TEMP}" -type f \( -name "*.apk" -o -name "*.aab" \)
+          ls -l "${RUNNER_TEMP}"
 
       - name: Appcircle Testing Distribution
         uses: appcircleio/appcircle-testing-distribution-githubaction@feat/SP-201
