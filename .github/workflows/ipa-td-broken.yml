@@ -3,8 +3,9 @@ name: IPA to TD Broken
 on:
   push:
     branches: [ "test/github-extensions-td-eas-ipa" ]
-  pull_request:
-    branches: [ "test/github-extensions-td-eas-ipa" ]
+    paths:
+      - .github/workflows/ipa-td-broken.yml
+  workflow_dispatch:
 
 jobs:
   build:

@@ -3,8 +3,9 @@ name: IPA to EAS
 on:
   push:
     branches: [ "test/github-extensions-td-eas-ipa" ]
-  pull_request:
-    branches: [ "test/github-extensions-td-eas-ipa" ]
+    paths:
+      - .github/workflows/ipa-eas.yml
+  workflow_dispatch:
 
 jobs:
   build:
