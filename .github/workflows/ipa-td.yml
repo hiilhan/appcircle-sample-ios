@@ -39,5 +39,5 @@ jobs:
           personalAPIToken: ${{ secrets.AC_ACCESS_TOKEN }}
           profileName: ${{ vars.AC_PROFILE_NAME }}
           createProfileIfNotExists: ${{ vars.AC_CREATE_PROFILE_IF_NOT_EXISTS }}
-          appPath: $RUNNER_TEMP/Appcircle.ipa
+          appPath: ${{ runner.temp }}/Appcircle.ipa
           message: "Hello from Github to TD"
