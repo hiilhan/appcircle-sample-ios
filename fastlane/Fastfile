@@ -53,7 +53,8 @@ platform :ios do
         provisioningProfiles: { 
           "io.appcircle.dashboard" => ENV["AC_PP_UUID"]
         }
-      }
+      },
+      archive_path: "./build/Release", # Export .xarchive
     )
 
     # Delete the temporary keychain
@@ -63,8 +64,9 @@ platform :ios do
   lane :deploy_td do
     appcircle_testing_distribution(
       accessToken: ENV["AC_ACCESS_TOKEN"], # Your Appcircle Access Token
-      profileID: ENV["AC_PROFILE_ID"], # ID of your Appcircle Distribution Profile
       appPath: ENV["AC_APP_PATH"], # Path to your iOS .ipa or .xcarchive, or Android APK or App Bundle
+      profileName: ENV["AC_PROFILE_NAME"], # ID of your Appcircle Distribution Profile
+      createProfileIfNotExists: ENV["CREATE_PROFILE_IF_NOT_EXISTS"],
       message: ENV["AC_MESSAGE"] # Your Message
     )
   end
@@ -72,8 +74,9 @@ platform :ios do
   lane :deploy_eas do
       appcircle_enterprise_store(
         accessToken: ENV["AC_ACCESS_TOKEN"],
-        entProfileId: ENV["ENTERPRISE_PROFILE_ID"],
         appPath: ENV["AC_APP_PATH"],
+        entProfileName: ENV["ENTERPRISE_PROFILE_NAME"],
+        createProfileIfNotExists: ENV["CREATE_PROFILE_IF_NOT_EXISTS"],
         summary: ENV["SUMMARY"],
         releaseNotes: ENV["RELEASE_NOTES"],
         publishType: ENV["PUBLISH_TYPE"] # Assign the appropriate number based on the status: None (0), Beta (1), Live (2)
