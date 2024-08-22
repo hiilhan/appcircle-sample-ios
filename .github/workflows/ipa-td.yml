@@ -31,12 +31,9 @@ jobs:
 
       - name: Appcircle Testing Distribution
         uses: appcircleio/appcircle-testing-distribution-githubaction@feat/SP-201
-        env:
-          AC_ACCESS_TOKEN: ${{ secrets.AC_ACCESS_TOKEN }}
-          AC_PROFILE_NAME: ${{ vars.AC_PROFILE_NAME }}
         with:
-          personalAPIToken: $AC_ACCESS_TOKEN
-          profileName: $AC_PROFILE_NAME
+          personalAPIToken: ${{ secrets.AC_ACCESS_TOKEN }}
+          profileName: ${{ vars.AC_PROFILE_NAME }}
           createProfileIfNotExists: ${{ vars.AC_CREATE_PROFILE_IF_NOT_EXISTS }}
           appPath: $RUNNER_TEMP/Appcircle.ipa
           message: "Hello from Github to TD"
