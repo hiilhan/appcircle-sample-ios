@@ -16,17 +16,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # - name: Import .ipa file
-      #   env:
-      #     IPA_URL: ${{ vars.IPA_URL }}
-      #   run: |
-      #     git clone $IPA_URL
-      #     mv */*.ipa $RUNNER_TEMP
       - name: Import .ipa file
         env:
-          APPCIRCLE_IPA_BASE64: ${{ vars.APPCIRCLE_IPA_BASE64 }}
+          IPA_URL: ${{ vars.IPA_URL }}
         run: |
-          echo -n "$APPCIRCLE_IPA_BASE64" | base64 --decode -o $RUNNER_TEMP/Appcircle.ipa
+          git clone $IPA_URL
+          mv */*.ipa $RUNNER_TEMP
+      
+      # - name: Import .ipa file
+      #   env:
+      #     APPCIRCLE_IPA_BASE64: ${{ vars.APPCIRCLE_IPA_BASE64 }}
+      #   run: |
+      #     echo -n "$APPCIRCLE_IPA_BASE64" | base64 --decode -o $RUNNER_TEMP/Appcircle.ipa
 
       - name: Find Artifacts
         run: |
