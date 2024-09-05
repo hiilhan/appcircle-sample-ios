@@ -61,6 +61,12 @@ steps:
 #     releaseNotes: '$(ac-release-notes)'
 #     publishType: 'Beta'
 
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo $(Build.ArtifactStagingDirectory)
+      ls -lha $(Build.ArtifactStagingDirectory)
+
 - task: AppcircleEnterpriseStore@0
   inputs:
     personalAPIToken: '$(ac-pat)'
