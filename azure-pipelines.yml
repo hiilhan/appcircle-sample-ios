@@ -15,42 +15,42 @@ pool:
   # name: 'MacOS-Agent' # Self-hosted
 
 steps:
-# # BUILD START
-# - script: openssl version
-#   displayName: 'Check OpenSSL Version'
-# - task: InstallAppleCertificate@2
-#   inputs:
-#     certSecureFile: 'ac-sample-distribution.p12'
-#     certPwd: '' # '$(p12-password)'
-#     keychain: 'temp'
-#     # opensslPkcsArgs: '-legacy' # Note: Enable for Self-hosted agent
-# - task: InstallAppleProvisioningProfile@1
-#   inputs:
-#     provisioningProfileLocation: 'secureFiles'
-#     provProfileSecureFile: 'ac-sample-adhoc.mobileprovision'
-# - task: Xcode@5
-#   inputs:
-#     actions: 'clean build'
-#     configuration: 'Release'
-#     sdk: 'iphoneos'
-#     scheme: 'Appcircle'
-#     packageApp: true
-#     signingOption: 'manual'
-#     signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
-#     provisioningProfileUuid: '$(APPLE_PROV_PROFILE_UUID)'
-# - task: CopyFiles@2
-#   inputs:
-#     SourceFolder: '$(system.defaultworkingdirectory)'
-#     Contents: '**/*.ipa'
-#     TargetFolder: '$(build.artifactStagingDirectory)'
-#     OverWrite: true
-#     flattenFolders: true
-# - task: PublishBuildArtifacts@1
-#   inputs:
-#     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-#     ArtifactName: 'ac-sample-artifact'
-#     publishLocation: 'Container'
-# # BUILD END
+# BUILD START
+- script: openssl version
+  displayName: 'Check OpenSSL Version'
+- task: InstallAppleCertificate@2
+  inputs:
+    certSecureFile: 'ac-sample-distribution.p12'
+    certPwd: '' # '$(p12-password)'
+    keychain: 'temp'
+    # opensslPkcsArgs: '-legacy' # Note: Enable for Self-hosted agent
+- task: InstallAppleProvisioningProfile@1
+  inputs:
+    provisioningProfileLocation: 'secureFiles'
+    provProfileSecureFile: 'ac-sample-adhoc.mobileprovision'
+- task: Xcode@5
+  inputs:
+    actions: 'clean build'
+    configuration: 'Release'
+    sdk: 'iphoneos'
+    scheme: 'Appcircle'
+    packageApp: true
+    signingOption: 'manual'
+    signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
+    provisioningProfileUuid: '$(APPLE_PROV_PROFILE_UUID)'
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(system.defaultworkingdirectory)'
+    Contents: '**/*.ipa'
+    TargetFolder: '$(build.artifactStagingDirectory)'
+    OverWrite: true
+    flattenFolders: true
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'ac-sample-artifact'
+    publishLocation: 'Container'
+# BUILD END
 
 # - task: AppcircleEnterpriseStore@0
 #   inputs:
@@ -73,8 +73,8 @@ steps:
   inputs:
     personalAPIToken: '$(ac-pat)'
     # appPath: '$(Build.ArtifactStagingDirectory)/Appcircle.ipa'
-    # appPath: 'output/$(SDK)/$(Configuration)/Appcircle.ipa'
-    appPath: 'build/test/not-exists.ipa'
+    appPath: 'output/$(SDK)/$(Configuration)/Appcircle.ipa'
+    # appPath: 'build/test/not-exists.ipa'
     summary: '$(ac-summary-notes)'
     releaseNotes: '$(ac-release-notes)'
     publishType: 'None'
