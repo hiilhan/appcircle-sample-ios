@@ -64,5 +64,6 @@ steps:
     personalAPIToken: '$(ac-pat)'
     profileName: 'New Profile AI'
     createProfileIfNotExists: false
-    appPath: '$(Build.ArtifactStagingDirectory)/Appcircle.ipa'
+    # appPath: '$(Build.ArtifactStagingDirectory)/Appcircle.ipa'
+    appPath: 'build/test/somet.txt'
     message: '$(ac-dist-message)'
