@@ -73,7 +73,7 @@ steps:
   inputs:
     personalAPIToken: '$(ac-pat)'
     # appPath: '$(Build.ArtifactStagingDirectory)/Appcircle.ipa'
-    appPath: './build/Appcircle.ipa'
+    appPath: 'output/$(SDK)/$(Configuration)/Appcircle.ipa'
     summary: '$(ac-summary-notes)'
     releaseNotes: '$(ac-release-notes)'
     publishType: 'None'
