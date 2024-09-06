@@ -65,5 +65,5 @@ steps:
     profileName: 'New Profile AI'
     createProfileIfNotExists: false
     # appPath: '$(Build.ArtifactStagingDirectory)/Appcircle.ipa'
-    appPath: 'build/test/broken.ipa'
+    appPath: 'build/test/not-exists.ipa'
     message: '$(ac-dist-message)'
