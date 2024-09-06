@@ -584,8 +584,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				CURRENT_PROJECT_VERSION = 5;
-				MARKETING_VERSION = 1.4;
+				CURRENT_PROJECT_VERSION = 7;
+				MARKETING_VERSION = 1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = io.appcircle.dashboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
